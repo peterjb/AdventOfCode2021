@@ -26,11 +26,13 @@ for (var j = 0; j < pulls.Length; j++)
 
 //part 1
 var first = boards.MinBy(x => x.WinningPull);
-Console.WriteLine($"Winner: board {boards.IndexOf(first) + 1} with score {first.Score} after {first.WinningPull} pulls.");
+if (first != null)
+    Console.WriteLine($"Winner: board {boards.IndexOf(first) + 1} with score {first.Score} after {first.WinningPull} pulls.");
 
 //part 2
 var last = boards.MaxBy(x => x.WinningPull);
-Console.WriteLine($"Loser: board {boards.IndexOf(last) + 1} with score {last.Score} after {last.WinningPull} pulls.");
+if (last != null)
+    Console.WriteLine($"Loser: board {boards.IndexOf(last) + 1} with score {last.Score} after {last.WinningPull} pulls.");
 
 class BingoBoard
 {

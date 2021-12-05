@@ -24,7 +24,7 @@ var count2 = File.ReadLines("input.txt")
         (value, value > tuple.Item1 ? tuple.Item2 + 1 : tuple.Item2)
     ).Item2;
 
-Console.WriteLine($"Rolling Sum Increases: {count2}");   
+Console.WriteLine($"Rolling Sum Increases: {count2}");
 
 public static class Extensions
 {
@@ -53,7 +53,7 @@ public static class Extensions
         {
             for (var i = 0; i < last; i++)
             {
-                vs[i] = vs[i+1] + t;
+                vs[i] = vs[i + 1] + t;
             }
             vs[last] = t;
 

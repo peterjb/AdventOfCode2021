@@ -6,7 +6,7 @@ var position = File.ReadLines("input.txt").Aggregate((0, 0), (current, line) =>
 {
     var command = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
     var amount = int.Parse(command[1]);
-    switch(command[0])
+    switch (command[0])
     {
         case "forward":
             return (current.Item1 + amount, current.Item2);
@@ -17,7 +17,7 @@ var position = File.ReadLines("input.txt").Aggregate((0, 0), (current, line) =>
         default:
             throw new ArgumentOutOfRangeException("unrecognized direction");
     }
- });
+});
 
 Console.WriteLine($"Final Position: {position}; Product: {position.Item1 * position.Item2}");
 

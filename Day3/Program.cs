@@ -8,11 +8,11 @@ var bitCount = input[0].Length;
 var bitSums = new int[bitCount];
 
 //count how many 1s are in each position
-foreach(var s in input)
+foreach (var s in input)
 {
-    for(var i = 0; i < bitCount; i++)
+    for (var i = 0; i < bitCount; i++)
     {
-        if(s[i] == '1')
+        if (s[i] == '1')
         {
             bitSums[i]++;
         }
@@ -30,7 +30,7 @@ int midPoint = input.Length / 2;
 for (var j = 0; j < bitCount; j++)
 {
     //construct the numbers
-    if(bitSums[j] > midPoint)
+    if (bitSums[j] > midPoint)
     {
         gamma |= mask >> j;
     }
@@ -40,23 +40,23 @@ for (var j = 0; j < bitCount; j++)
     }
 }
 
-Console.WriteLine($"Epsilon: {epsilon}; Gamma: {gamma}; Power: {epsilon*gamma}");
+Console.WriteLine($"Epsilon: {epsilon}; Gamma: {gamma}; Power: {epsilon * gamma}");
 
 //part 2
 
 //just keeping it simple and doing o2 and co2 separately
 string[] o2matches = input, co2matches = input;
 
-for(var k = 0; k < bitCount; k++)
+for (var k = 0; k < bitCount; k++)
 {
     //for each bit position, starting to left, count the 1 bits in the list of remaining candidates
     var onesCount = o2matches.Sum(x => x[k] == '1' ? 1 : 0);
     //determine if we are looking for a 0 or 1
-    char o2Matchbit =  onesCount >= o2matches.Length - onesCount ? '1' : '0';
+    char o2Matchbit = onesCount >= o2matches.Length - onesCount ? '1' : '0';
     //create a new list of just the values that match the bit at that position
     o2matches = o2matches.Where(x => x[k] == o2Matchbit).ToArray();
     //if we are down to 1 candidate we can stop early
-    if(o2matches.Length == 1)
+    if (o2matches.Length == 1)
     {
         break;
     }
@@ -77,4 +77,4 @@ for (var k = 0; k < bitCount; k++)
 var o2 = Convert.ToInt32(o2matches[0], 2);
 var co2 = Convert.ToInt32(co2matches[0], 2);
 
-Console.WriteLine($"O2: {o2}; CO2:{co2}; Life Support Rating:{o2*co2}");
+Console.WriteLine($"O2: {o2}; CO2:{co2}; Life Support Rating:{o2 * co2}");
