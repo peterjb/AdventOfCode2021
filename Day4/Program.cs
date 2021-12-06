@@ -46,7 +46,6 @@ class BingoBoard
         {
             boardValues[i] = values[i].Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToArray();
             rowState[i] = boardValues[i].Sum();
-            sumOfBoardValues += rowState[i];
         }
 
         for (var j = 0; j < boardSize; j++)
@@ -64,11 +63,10 @@ class BingoBoard
                 {
                     rowState[i] -= value;
                     colState[j] -= value;
-                    sumOfBoardValues -= value;
                     if (rowState[i] == 0 || colState[j] == 0)
                     {
                         Finished = true;
-                        Score = value * sumOfBoardValues;
+                        Score = value * rowState.Sum();
                         WinningPull = pullNumber;
                         return true;
                     }
@@ -85,5 +83,4 @@ class BingoBoard
     readonly int[][] boardValues;
     readonly int[] rowState;
     readonly int[] colState;
-    int sumOfBoardValues;
 }
