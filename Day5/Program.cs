@@ -2,7 +2,7 @@
 //EX2: 17882
 
 //setup
-
+//altered the input to make it slightly easier to read
 var lines = File.ReadLines("input.txt").Select(x =>
 {
     var points = x.Split(';');
@@ -21,9 +21,9 @@ analyseLines(lines.Where(l => l.P1.x == l.P2.x || l.P1.y == l.P2.y));
 Console.Write("All ");
 analyseLines(lines);
 
-
 static void analyseLines(IEnumerable<Line> lines)
 {
+    //find the width and height of the grid
     var width = lines.Max(l => Math.Max(l.P1.x, l.P2.x)) + 1;
     var height = lines.Max(l => Math.Max(l.P1.y, l.P2.y)) + 1;
 
