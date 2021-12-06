@@ -5,9 +5,11 @@ var days = 256;
 int childCycle = 8; //max index, so 9 days
 int adultCycle = 6; //index, so 7 days
 
+//read in all the fish
 var fish = File.ReadAllLines("input.txt")[0].Split(',', StringSplitOptions.RemoveEmptyEntries).Select(x => byte.Parse(x)).ToList();
 
-var groups = fish.GroupBy(x => x).Select(y => (y.Key, y.Count())).ToArray();
+//get the initial counts of fish by day in cycle
+var groups = fish.GroupBy(x => x).Select(y => (cycle: y.Key, count: y.Count())).ToArray();
 
 //keeps track of the amount of fish in each day of the lanternfish cycle
 //fish at index 0 are at timer 0, etc.
@@ -16,20 +18,19 @@ var counts = new Int64[childCycle + 1];
 //set the initial number of fish at each cycle day from the input
 foreach(var g in groups)
 {
-    counts[g.Item1] = g.Item2;
+    counts[g.cycle] = g.count;
 }
 
 //each day, update the number of fish at each day of the cycle
-//fish at day 5 are now at day 4, etc.
-//fish at day 0 go to day 6, and an equal number of new fish are put at day 8 (the children of those fish at 0)
+//fish at cycle 5 are now at cycle 4, etc.
+//fish at cycle 0 reset to cycle 6, and an equal number of new fish are put at cycle 8 (the children of those fish at 0)
 for(var i = 0; i < days; i++)
 {
     var temp = counts[0];
-    for(var j = 0; j < childCycle; j++)
-    {
-        counts[j] = counts[j + 1];
-    }
-    counts[adultCycle] += temp;
+    //shift the array to the left
+    Array.Copy(counts, 1, counts, 0, counts.Length - 1);
+    
+    counts[adultCycle] += temp; //fish at cycle 0 go to cyle 6
     counts[childCycle] = temp; //this is where we add new fish.
 }
 
