@@ -4,7 +4,7 @@
 var boardSize = 5;
 var input = File.ReadAllLines("input.txt");
 
-List<BingoBoard> boards = new List<BingoBoard>();
+var boards = new List<BingoBoard>();
 
 //read in pulls
 var pulls = input[0].Split(',', StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToArray();
