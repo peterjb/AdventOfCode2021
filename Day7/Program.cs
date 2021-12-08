@@ -22,7 +22,7 @@ Console.WriteLine($"Part 2 Brute Force - position: {position}; cost: {cost}");
 /* OK here we go for a formula...
  * want to minimize the sum of the cost function over the list of positions
  *
- * y(d) = sum(n * (n + 1) / 2) 
+ * y(n) = sum(n * (n + 1) / 2) 
  *
  * n = abs(input[i] - x)
  * x is the position to move to
@@ -48,9 +48,18 @@ Console.WriteLine($"Part 2 Brute Force - position: {position}; cost: {cost}");
  * 
  * ... needs more thought, i'm sure there's something i'm missing, but the below code should work, probably :)
  * 
+ * So after looking at some other solutions, most people seemed to do it via brute force, but one person
+ * i found knew immediately that the position should be the mean. Of course I missed that the formula above is the
+ * mean +/- 1/2. 
+ * 
+ * I'm not sure if there's a way to get rid of those 1/2s that i'm missing. Either the foruma is wrong (likely), or N1 = N2, which
+ * i don't have an intuition as to why that must be the case. I also don't have an intuition as to why it should be the mean 
+ * in the first place.
+ * 
  */
 
-var calc = input.Sum() / (double)input.Length;
+//var calc = input.Sum() / (double)input.Length; //this is the mean, ::facepalm::
+var calc = input.Average();
 var position1 = (int)Math.Ceiling(calc);
 var position2 = (int)Math.Floor(calc);
 var cost1 = calcCost(input, position1);
