@@ -52,7 +52,7 @@ Console.WriteLine($"Part 2 Brute Force - position: {position}; cost: {cost}");
  * i found knew immediately that the position should be the mean. Of course I missed that the formula above is the
  * mean +/- 1/2. 
  * 
- * I'm not sure if there's a way to get rid of those 1/2s that i'm missing. Either the foruma is wrong (likely), or N1 = N2, which
+ * I'm not sure if there's a way to get rid of those 1/2s that i'm missing. Either the formula is wrong (likely), or N1 = N2, which
  * i don't have an intuition as to why that must be the case. I also don't have an intuition as to why it should be the mean 
  * in the first place.
  * 

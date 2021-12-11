@@ -39,7 +39,7 @@ Console.WriteLine($"Count of simple outputs: {input.Sum(x => x.output.Count(y =>
  * If the pattern has a lenght of 5, it could represent a 2,3 or 5. If it has length 6, it could represent 0,6 or 9.
  * For those, we have to check each permutation of the pattern against all three possibilites
  * 
- * So the algorith is 
+ * So the algorithm is 
  *  for each line in the input 
  *    for each permutation of the wire map
  *      for each pattern
