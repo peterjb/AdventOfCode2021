@@ -3,6 +3,9 @@
  * It's kinda janky, but...
  *  Advent of Code 2021 complete!
  * 
+ * Edit: It bothered me that this was so slow. I wasn't updating the state cache with new scores :-(
+ *   Now it runs at a more reasonable time, down from ~45seconds to ~5
+ * 
  */
 
 /* 
@@ -182,6 +185,20 @@ long move(ref Piece piece, int x, int y)
 //    (Ok i measured on the sample and it more than halved the time required having the state checks
 void doMoves(Piece[] pieces, long score)
 {
+    var state = getState(pieces);
+    if (!states.Contains(state))
+    {
+        states.Add(state);
+        stateCosts.Add(state, score);
+    }
+    else if (stateCosts[state] > score)
+    {
+        stateCosts[state] = score;
+    }
+    else
+    {
+        return;
+    }
     //foreach state we are in, check if we can move each piece. If we can move a piece, check where that leaves us, and recurse if we aren't done
     for (var i = 0; i < pieces.Length; i++)
     {
@@ -220,20 +237,7 @@ void doMoves(Piece[] pieces, long score)
             }
             else
             {
-                //if we aren't done, get the new state and see if we've been here before
-                //if not, or we have been here before but at a higher cost, keep going
-                //i did measure and the state is working
-                var s = getState(newPieces);
-                if (!states.Contains(s))
-                {
-                    states.Add(s);
-                    stateCosts.Add(s, nextScore);
-                    doMoves(newPieces, nextScore);
-                }
-                else if (stateCosts[s] > nextScore)
-                {
-                    doMoves(newPieces, nextScore);
-                }
+                doMoves(newPieces, nextScore);
             }
         }
         else if (piece.y > 0)
